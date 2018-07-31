@@ -66,10 +66,7 @@ def start_game(ai_settings,screen,stats,sb,ship,aliens,bullets):
 	stats.game_active = True
 
 	#重置记分牌图像
-	sb.prep_score()
-	sb.prep_high_score()
-	sb.prep_level()
-	sb.prep_ships()
+	sb.prep_images()
 
 	#清空子弹和外星人列表
 	aliens.empty()
@@ -114,24 +111,28 @@ def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
 def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullets):
 	"""响应子弹和外星人的碰撞"""
 	#删除发生碰撞的子弹和外星人
-	##如果是这样,就删除相应的外星人和子弹   (两个参数分别为让子弹和外星人消失)
+	#删除相应的外星人和子弹   (两个参数分别为让子弹和外星人消失)
 	collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 	if len(aliens) ==0:
 		#如果整群外星人都被消灭,就提高一个等级
-		bullets.empty()
-		ai_settings.increase_speed()
-
-		#提高等级
-		stats.level += 1
-		sb.prep_level()
-
+		statr_new_level(ai_settings, bullets, stats, sb)
+		#创建新的外星人
 		create_fleet(ai_settings, screen, ship, aliens)
 
+	#积分
 	if collisions:
 		for aliens in collisions.values():
 			stats.score += ai_settings.alien_points * len(aliens)
 			sb.prep_score()
 		check_high_score(stats, sb)
+
+def statr_new_level(ai_settings,bullets,stats,sb):
+	""",当消灭完一群外星人后,开始新等级"""
+	bullets.empty()
+	ai_settings.increase_speed()
+	#提高等级
+	stats.level += 1
+	sb.prep_level()
 
 def fire_bullet(ai_settings,screen,ship,bullets):
 	"""如果还没有达到限制,就发射一颗子弹"""

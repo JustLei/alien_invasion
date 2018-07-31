@@ -16,10 +16,7 @@ class Scoreboard():
 		self.font = pygame.font.SysFont(None, 48)
 
 		#准备包含最高得分和当前得分的图像
-		self.prep_score()
-		self.prep_high_score()
-		self.prep_level()
-		self.prep_ships()
+		self.prep_images()
 
 	def prep_score(self):
 		"""将得分转换为一副渲染的图像"""
@@ -69,5 +66,11 @@ class Scoreboard():
 			ship.rect.y = 10
 			self.ships.add(ship)
 
+	def prep_images(self):
+		"""图像准备"""
+		self.prep_score()
+		self.prep_high_score()
+		self.prep_level()
+		self.prep_ships()
 	
 				
