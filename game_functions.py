@@ -34,7 +34,6 @@ def check_keyup_events(event,ship):
 	elif event.key == pygame.K_UP:
 		ship.moving_up = False
 
-
 def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
 	"""响应按键和鼠标事件"""
 	for event in pygame.event.get():
