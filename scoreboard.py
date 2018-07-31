@@ -71,6 +71,4 @@ class Scoreboard():
 		self.prep_score()
 		self.prep_high_score()
 		self.prep_level()
-		self.prep_ships()
-	
-				
+		self.prep_ships()			
